@@ -35,16 +35,12 @@ export class UsersService {
 
     return await this.repository.signIn(email, token);
   }
-  /* 
-    findOne(id: number) {
-      return `This action returns a #${id} user`;
-    }
-  
-    update(id: number, updateUserDto: UpdateUserDto) {
-      return `This action updates a #${id} user`;
-    }
-  
-    remove(id: number) {
-      return `This action removes a #${id} user`;
-    } */
+
+  async logout(id: string) {
+    const sessionId = parseInt(id);
+    const session = await this.repository.findUserSession(sessionId);
+    if (!session) throw new UnauthorizedException("Unauthorized user");
+
+    return await this.repository.logout(session.id);
+  }
 }
