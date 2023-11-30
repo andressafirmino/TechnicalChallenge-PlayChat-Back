@@ -44,4 +44,15 @@ export class UsersRepository {
   async logout(id: number) {
     return await this.prisma.session.delete({ where: { id } })
   }
+
+  async findUsersById(senderId: number, receiverId: number) {
+    return await this.prisma.user.findMany({
+      where: {
+        OR: [
+          { id: senderId },
+          { id: receiverId }
+        ]
+      }
+    })
+  }
 }

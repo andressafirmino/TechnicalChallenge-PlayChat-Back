@@ -9,23 +9,23 @@ import { SignInDto } from './dto/login-user.dto';
 export class UsersService {
 
   constructor(
-    private readonly repository: UsersRepository,
+    private readonly userRepository: UsersRepository,
     private readonly jwt: JwtService
   ) { }
 
   async createUser(createUserDto: CreateUserDto) {
     const { name, email } = createUserDto
-    const { userName, userEmail } = await this.repository.findByNameAndEmail(name, email);
+    const { userName, userEmail } = await this.userRepository.findByNameAndEmail(name, email);
 
     if (userName || userEmail) throw new ConflictException("Name and/or email already exist");
 
-    await this.repository.createUser(createUserDto);
+    await this.userRepository.createUser(createUserDto);
     return;
   }
 
   async signIn(signInDto: SignInDto) {
     const { email, password } = signInDto;
-    const user = await this.repository.findUserByEmail(email);
+    const user = await this.userRepository.findUserByEmail(email);
     if (!user) throw new UnauthorizedException("Invalid name and/or password");
 
     const compare = await bcrypt.compare(password, user.password);
@@ -33,14 +33,18 @@ export class UsersService {
 
     const token = this.jwt.sign(email);
 
-    return await this.repository.signIn(email, token);
+    return await this.userRepository.signIn(email, token);
   }
 
   async logout(id: string) {
     const sessionId = parseInt(id);
-    const session = await this.repository.findUserSession(sessionId);
+    const session = await this.userRepository.findUserSession(sessionId);
     if (!session) throw new UnauthorizedException("Unauthorized user");
 
-    return await this.repository.logout(session.id);
+    return await this.userRepository.logout(session.id);
+  }
+
+  async findUsersById(senderId: number, receiverId: number) {
+    return await this.userRepository.findUsersById(senderId, receiverId)
   }
 }
