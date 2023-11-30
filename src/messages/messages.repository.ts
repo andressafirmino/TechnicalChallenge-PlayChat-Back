@@ -12,4 +12,10 @@ export class MessagesRepository {
             data: createMessageDto
         })
     }
+
+    async findAllMessages() {
+        return await this.prisma.message.findMany({
+            include: { sender: true, receiver: true }
+        });
+    }
 }

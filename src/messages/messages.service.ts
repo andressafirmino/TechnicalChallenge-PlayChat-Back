@@ -26,10 +26,10 @@ export class MessagesService {
     return await this.messagesRepository.createMessage(createMessageDto);
   }
 
-  /* findAll() {
-    return `This action returns all messages`;
+  async  findAllMessages() {
+    return await this.messagesRepository.findAllMessages();
   }
-
+/*
   findOne(id: number) {
     return `This action returns a #${id} message`;
   }
