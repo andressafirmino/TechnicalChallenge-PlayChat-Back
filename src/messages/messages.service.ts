@@ -26,19 +26,19 @@ export class MessagesService {
     return await this.messagesRepository.createMessage(createMessageDto);
   }
 
-  async  findAllMessages() {
+  async findAllMessages() {
     return await this.messagesRepository.findAllMessages();
   }
-/*
-  findOne(id: number) {
-    return `This action returns a #${id} message`;
-  }
 
-  update(id: number, updateMessageDto: UpdateMessageDto) {
-    return `This action updates a #${id} message`;
+  async findPrivateMessagesById(senderId: string, receiverId: string) {
+    return await this.messagesRepository.findPrivateMessagesById(parseInt(senderId), parseInt(receiverId));
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} message`;
-  } */
+  /*
+    update(id: number, updateMessageDto: UpdateMessageDto) {
+      return `This action updates a #${id} message`;
+    }
+  
+    remove(id: number) {
+      return `This action removes a #${id} message`;
+    } */
 }

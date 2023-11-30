@@ -16,19 +16,19 @@ export class MessagesController {
   findAll() {
     return this.messagesService.findAllMessages();
   }
-/* 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.messagesService.findOne(+id);
-  }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMessageDto: UpdateMessageDto) {
-    return this.messagesService.update(+id, updateMessageDto);
+  @Get(':senderId/:receiverId')
+  findOne(@Param('senderId') senderId: string, @Param('receiverId') receiverId: string) {
+    return this.messagesService.findPrivateMessagesById(senderId, receiverId);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.messagesService.remove(+id);
-  } */
+  /* 
+    @Patch(':id')
+    update(@Param('id') id: string, @Body() updateMessageDto: UpdateMessageDto) {
+      return this.messagesService.update(+id, updateMessageDto);
+    }
+  
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+      return this.messagesService.remove(+id);
+    } */
 }

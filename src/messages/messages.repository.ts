@@ -18,4 +18,27 @@ export class MessagesRepository {
             include: { sender: true, receiver: true }
         });
     }
+
+    async findPrivateMessagesById(senderId: number, receiverId: number) {
+        const privateMessages = await this.prisma.message.findMany({
+            where: {
+                isPrivate: true,
+                OR: [
+                    {
+                        senderId: senderId,
+                        receiverId: receiverId,
+                    },
+                    {
+                        senderId: receiverId,
+                        receiverId: senderId,
+                    },
+                ],
+            },
+            orderBy: {
+                createdAt: 'asc'
+            },
+        });
+
+        return privateMessages;
+    }
 }
