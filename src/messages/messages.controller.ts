@@ -1,15 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
+import { AuthGuard } from '../guards/auth.guards';
+import { User } from '../decorators/user.decorator';
+import { User as UserPrisma } from '@prisma/client';
 
 @Controller('messages')
 export class MessagesController {
   constructor(private readonly messagesService: MessagesService) { }
 
+  @UseGuards(AuthGuard)
   @Post()
-  createMessage(@Body() createMessageDto: CreateMessageDto) {
-    return this.messagesService.createMessage(createMessageDto);
+  createMessage(@Body() createMessageDto: CreateMessageDto, @User() user: UserPrisma) {
+    console.log(user)
+    return this.messagesService.createMessage(createMessageDto, user)
   }
 
   @Get()
@@ -21,14 +25,4 @@ export class MessagesController {
   findOne(@Param('senderId') senderId: string, @Param('receiverId') receiverId: string) {
     return this.messagesService.findPrivateMessagesById(senderId, receiverId);
   }
-  /* 
-    @Patch(':id')
-    update(@Param('id') id: string, @Body() updateMessageDto: UpdateMessageDto) {
-      return this.messagesService.update(+id, updateMessageDto);
-    }
-  
-    @Delete(':id')
-    remove(@Param('id') id: string) {
-      return this.messagesService.remove(+id);
-    } */
 }

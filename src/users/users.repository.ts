@@ -33,7 +33,7 @@ export class UsersRepository {
 
   async signIn(email: string, token: string) {
     return await this.prisma.session.create({
-      data: { email, token }, select: { token: true }
+      data: { email, token }, select: { id: true, token: true }
     })
   }
 

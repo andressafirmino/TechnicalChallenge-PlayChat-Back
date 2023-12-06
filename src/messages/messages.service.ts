@@ -1,8 +1,8 @@
 import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { CreateMessageDto } from './dto/create-message.dto';
-import { UpdateMessageDto } from './dto/update-message.dto';
 import { MessagesRepository } from './messages.repository';
 import { UsersRepository } from 'src/users/users.repository';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class MessagesService {
@@ -12,7 +12,7 @@ export class MessagesService {
     private readonly userRepository: UsersRepository
   ) { }
 
-  async createMessage(createMessageDto: CreateMessageDto) {
+  async createMessage(createMessageDto: CreateMessageDto, user: User) {
     const { senderId, receiverId, text, isPrivate } = createMessageDto;
 
     if (isPrivate && !receiverId || !isPrivate && receiverId) throw new BadRequestException("Invalid data when sending private message");
@@ -33,12 +33,4 @@ export class MessagesService {
   async findPrivateMessagesById(senderId: string, receiverId: string) {
     return await this.messagesRepository.findPrivateMessagesById(parseInt(senderId), parseInt(receiverId));
   }
-  /*
-    update(id: number, updateMessageDto: UpdateMessageDto) {
-      return `This action updates a #${id} message`;
-    }
-  
-    remove(id: number) {
-      return `This action removes a #${id} message`;
-    } */
 }
