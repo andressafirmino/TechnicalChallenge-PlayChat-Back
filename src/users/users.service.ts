@@ -34,7 +34,8 @@ export class UsersService {
 
     const token = this.jwt.sign(email);
 
-    return await this.userRepository.signIn(email, token);
+    const logged = await this.userRepository.signIn(email, token);
+    return {userId: user.id, token: logged.token }
   }
 
   async logout(id: string) {

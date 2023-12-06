@@ -15,14 +15,14 @@ export class MessagesService {
   async createMessage(createMessageDto: CreateMessageDto) {
     const { senderId, receiverId, text, isPrivate } = createMessageDto;
 
-    if (isPrivate && !receiverId || !isPrivate && receiverId) throw new BadRequestException("Invalid data when sending private message");
+       if (isPrivate && !receiverId || !isPrivate && receiverId) throw new BadRequestException("Invalid data when sending private message");
     if (senderId === receiverId) throw new BadRequestException("Private message must have a receiver other than the sender");
-
+    
     if (receiverId) {
       const users = await this.userRepository.findUsersById(senderId, receiverId);
       if (users.length !== 2) throw new BadRequestException("Private message should only be sent between registered users");
     }
-
+    
     return await this.messagesRepository.createMessage(createMessageDto);
   }
 
