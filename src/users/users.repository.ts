@@ -24,7 +24,7 @@ export class UsersRepository {
     const userEmail = await this.prisma.user.findUnique({
       where: { email }
     })
-    console.log(userName, userEmail)
+    
     return { userName, userEmail };
   }
   async findUserByEmail(email: string) {
