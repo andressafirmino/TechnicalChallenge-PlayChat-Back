@@ -12,7 +12,7 @@ export class MessagesService {
     private readonly userRepository: UsersRepository
   ) { }
 
-  async createMessage(createMessageDto: CreateMessageDto, user: User) {
+  async createMessage(createMessageDto: CreateMessageDto) {
     const { senderId, receiverId, text, isPrivate } = createMessageDto;
 
     if (isPrivate && !receiverId || !isPrivate && receiverId) throw new BadRequestException("Invalid data when sending private message");

@@ -14,9 +14,8 @@ export class MessagesController {
   @Post()
   @UseGuards(AuthGuard)
   @ApiBearerAuth()
-  createMessage(@Body() createMessageDto: CreateMessageDto, @User() user: UserPrisma) {
-    console.log(user)
-    return this.messagesService.createMessage(createMessageDto, user)
+  createMessage(@Body() createMessageDto: CreateMessageDto) {
+    return this.messagesService.createMessage(createMessageDto)
   }
 
   @Get()
