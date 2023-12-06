@@ -25,6 +25,7 @@ export class UsersService {
 
   async signIn(signInDto: SignInDto) {
     const { email, password } = signInDto;
+
     const user = await this.userRepository.findUserByEmail(email);
     if (!user) throw new UnauthorizedException("Invalid name and/or password");
 
