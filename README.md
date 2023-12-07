@@ -6,7 +6,7 @@ Back-end application for the technical challenge of the Full Stack Jr. In this a
 [https://github.com/andressafirmino/TechnicalChallenge-PlayChat-Back]()
 
 # Deploy
-<a href="https://play-chat-api.onrender.com">Play Chat</a>
+<a href="https://technical-challenge-play-chat-front.vercel.app/">Play Chat</a>
 
 # How does it work?
 This project is a REST API for exchanging messages. It has two entities: `users` and `messages`. The characteristics of these entities are in the `schema.prisma` file.
