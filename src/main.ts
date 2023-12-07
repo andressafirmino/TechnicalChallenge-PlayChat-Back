@@ -9,7 +9,7 @@ async function bootstrap() {
   app.enableCors({
     origin: '*',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    allowedHeaders: 'Origin,Accept,Content-Type,Authorization', // Cabeçalhos permitidos
   });
   app.useGlobalPipes(new ValidationPipe());
 
@@ -23,7 +23,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, setting);
 
   SwaggerModule.setup("api", app, document);
-
 
   const port = process.env.PORT || 4000;
   await app.listen(port, () => {

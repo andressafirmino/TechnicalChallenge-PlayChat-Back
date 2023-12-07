@@ -1,73 +1,67 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Play Chat
+Back-end application for the technical challenge of the Full Stack Jr. In this application, it is possible to manage the back-end of a small chat through HTTP(s) requests following the REST convention.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Demo
+[https://github.com/andressafirmino/TechnicalChallenge-PlayChat-Back]()
 
-## Description
+# Deploy
+[https://play-chat-api.onrender.com]()
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# How does it work?
+This project is a REST API for exchanging messages. It has two entities: `users` and `messages`. The characteristics of these entities are in the `schema.prisma` file.
 
-## Installation
+For the `users` entity, three routes were created:
 
-```bash
-$ npm install
+- POST `/sign-up`: Register a user.
+- POST `/sign-in`: Login user. If the user is not registered, a 401 error is returned.
+- DELETE `/user/:id`: Log out a user given their id. If the user is not logged in a 401 error is returned.
+
+For the `messages` entity, three routes were created:
+
+- POST `/messages`: Send a message.
+- GET `/messages`: Get all messages.
+- GET `/:senderId/:receiverId`: Get all messages between two users.
+
+
+# Motivation
+This project is a REST API using the Node and NestJS ecosystem along with TypeScript and Prisma technologies. This was my first contact with NestJS and to be able to implement this framework I needed to learn the basics of Object Orientation. With this experience I was able to learn and practice important concepts of this technology, always aiming for clean code and scalability.
+
+# Technologies used
+For this project, the following were used:
+
+- Node;
+- NestJS;
+- TypeScript;
+- Prisma;
+- Postgres;
+- Redis;
+- JWT.
+
+# How to run in development
+To run this project under development, you need to follow the steps below:
+
+- Clone the repository;
+- Download the necessary dependencies with the command: `npm install`;
+- Then create the `.env` file based on `.env.example`;
+- This `.env` file is composed of the following properties:
 ```
-
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+- DATABASE_URL="postgres://postgres:password@local..."
+- JWT_SECRET="secret key"
+- REDIS_URL="redis://local..."
 ```
+- The `DATABASE_URL` property is used to connect to the database.
+- The `JWT_SECRET` property is used to allow the authentication server to delegate authentication authority to the client.
+- The `REDIS_URL` property is used to connect to the redis database.
 
-## Test
+- You will need to run Prisma to create the necessary database and tables. To do this, run the command: `npx prisma migrate dev`;
+- To run the project under development, run the command `npm run dev`;
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+# Continuity plan
+- Maintain user data logged into the redis database;
+- Implement websocket for realtime;
+- Implement adding users to friends list;
+- Implement room creation;
+- Implement message response;
+- Implement message editing.
