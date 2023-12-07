@@ -6,7 +6,7 @@ Back-end application for the technical challenge of the Full Stack Jr. In this a
 [https://github.com/andressafirmino/TechnicalChallenge-PlayChat-Back]()
 
 # Deploy
-[https://play-chat-api.onrender.com]()
+<a href="https://play-chat-api.onrender.com">Play Chat</a>
 
 # How does it work?
 This project is a REST API for exchanging messages. It has two entities: `users` and `messages`. The characteristics of these entities are in the `schema.prisma` file.
@@ -55,7 +55,7 @@ To run this project under development, you need to follow the steps below:
 - The `REDIS_URL` property is used to connect to the redis database.
 
 - You will need to run Prisma to create the necessary database and tables. To do this, run the command: `npx prisma migrate dev`;
-- To run the project under development, run the command `npm run dev`;
+- To run the project under development, run the command `npm run start:dev`;
 
 
 # Continuity plan
